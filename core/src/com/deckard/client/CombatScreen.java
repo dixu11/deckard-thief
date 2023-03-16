@@ -1,10 +1,16 @@
 package com.deckard.client;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.deckard.server.combat.Combat;
 
 public class CombatScreen implements Screen {
@@ -12,6 +18,7 @@ public class CombatScreen implements Screen {
     private final OrthographicCamera camera;
     private Combat combat;
     private CardActor leaderCard;
+    private Stage stage;
 
     public CombatScreen(GameScreen game, Combat combat) {
         this.game = game;
@@ -20,28 +27,41 @@ public class CombatScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 
-        leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0), texture);
+        stage = new Stage(new ScreenViewport(), game.getBatch());
+        Texture  texture = new Texture(Gdx.files.internal("card.png"));
+        leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0),texture);
+        stage.addActor(leaderCard);
+        Gdx.input.setInputProcessor(stage);
+        //leaderCard = new CardActor(, texture);
     }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.DARK_GRAY);
-
-        camera.update();
+        //stage
+        stage.act(delta);
         SpriteBatch batch = game.getBatch();
+        stage.draw();
+        //camera
+        camera.update();
         batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-      //render
-        batch.end();
-    }
+        //example render
 
-    @Override
-    public void show() {
 
     }
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height,true);
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
+    @Override
+    public void show() {
 
     }
 
@@ -57,11 +77,6 @@ public class CombatScreen implements Screen {
 
     @Override
     public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
 
     }
 }

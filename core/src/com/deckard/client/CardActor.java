@@ -13,12 +13,14 @@ public class CardActor extends Actor {
     public CardActor(Card card, Texture texture) {
         this.card = card;
         this.texture = texture;
-        setBounds(getX(), getY(), getWidth(), getHeight());
+        setBounds(getX(), getY(), GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(),
-                GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT, getScaleX(), getScaleY());
+                GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT, getScaleX(), getScaleY(),
+                getRotation(), 0, 0, texture.getWidth(), texture.getHeight(),
+                false, false);
     }
 }
