@@ -1,4 +1,5 @@
 package com.deckard.server.card;
+
 import com.deckard.server.game.MyRandom;
 
 import java.util.Arrays;

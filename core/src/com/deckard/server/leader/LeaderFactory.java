@@ -2,16 +2,17 @@ package com.deckard.server.leader;
 
 import com.deckard.server.card.CardFactory;
 import com.deckard.server.card.CardType;
-
-import java.util.ArrayList;
+import com.deckard.server.team.TeamFactory;
 
 public class LeaderFactory {
-    private final CardFactory cardFactory = new CardFactory();
+    private final TeamFactory teamFactory = new TeamFactory();
 
-    public Leader create(LeaderType leaderType) {
-        return switch (leaderType) {
-            case PLAYER -> new Leader(cardFactory.createCards(1, CardType.BASIC_ATTACK));
-            case SIMPLE_BOT -> new Leader(new ArrayList<>());
-        };
+    public Leader create(LeaderType type) {
+        Leader leader = new Leader(teamFactory.create(type));
+        if (type == LeaderType.PLAYER) {
+            leader.addCard(new CardFactory().createCard(CardType.UPGRADED_ATTACK));
+            leader.addCard(new CardFactory().createCard(CardType.BLOCK_BOOSTER));
+        }
+        return leader;
     }
 }

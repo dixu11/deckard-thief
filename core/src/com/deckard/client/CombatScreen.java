@@ -28,8 +28,8 @@ public class CombatScreen implements Screen {
 
         stage = new Stage(new ScreenViewport(), game.getBatch());
         Texture  texture = new Texture(Gdx.files.internal("card.png"));
-        CardActor leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0), texture,game.getFont());
-        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getCards().get(0), texture,game.getFont());
+        CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), texture,game.getFont());
+        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getHand().get(1), texture,game.getFont());
         HandGroup leaderHand = new HandGroup();
         leaderHand.setPosition(GuiParams.LEADER_HAND_X,GuiParams.LEADER_HAND_Y);
         leaderHand.addActor(leaderCard);
