@@ -1,6 +1,7 @@
 package com.deckard.client;
 
-import java.awt.*;
+
+import com.badlogic.gdx.graphics.Color;
 
 public class GuiParams {
     public static final Color MAIN_COLOR_BRIGHT = Color.GRAY;

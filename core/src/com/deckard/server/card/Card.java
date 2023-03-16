@@ -6,4 +6,8 @@ public class Card {
     public Card(CardType type) {
         this.type = type;
     }
+
+    public String getName() {
+        return type.getName();
+    }
 }
