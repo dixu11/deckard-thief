@@ -1,28 +1,19 @@
-package com.deckard;
+package com.deckard.client;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.deckard.server.combat.Combat;
 
-import java.util.Iterator;
-
-public class CombatView implements Screen {
-    private final Decard game;
+public class CombatScreen implements Screen {
+    private final GameScreen game;
     private final OrthographicCamera camera;
-    public CombatView(Decard game) {
+    private Combat combat;
+    public CombatScreen(GameScreen game, Combat combat) {
         this.game = game;
+        this.combat = combat;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);

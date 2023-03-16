@@ -1,17 +1,19 @@
-package com.deckard;
+package com.deckard.client;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.deckard.server.combat.CombatFactory;
 
-public class Decard extends Game {
+public class GameScreen extends Game {
     private SpriteBatch batch;
     private BitmapFont font;
     @Override
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        setScreen(new CombatView(this));
+        CombatFactory factory = new CombatFactory();
+        setScreen(new CombatScreen(this, factory.createCombat()));
     }
 
     public void render() {

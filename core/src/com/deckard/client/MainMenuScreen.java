@@ -1,16 +1,17 @@
-package com.deckard;
+package com.deckard.client;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.deckard.server.combat.CombatFactory;
 
 public class MainMenuScreen implements Screen {
 
-    private final Decard game;
+    private final GameScreen game;
     private final OrthographicCamera camera;
 
-    public MainMenuScreen(Decard game) {
+    public MainMenuScreen(GameScreen game) {
         this.game = game;
 
         camera = new OrthographicCamera();
@@ -28,7 +29,8 @@ public class MainMenuScreen implements Screen {
         game.getBatch().end();
 
         if (Gdx.input.isTouched()) {
-            game.setScreen(new CombatView(game));
+            CombatFactory factory = new CombatFactory();
+            game.setScreen(new CombatScreen(game, factory.createCombat()));
             dispose();
             System.out.println("test");
         }
