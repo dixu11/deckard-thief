@@ -11,12 +11,16 @@ public class CombatScreen implements Screen {
     private final GameScreen game;
     private final OrthographicCamera camera;
     private Combat combat;
+    private CardActor leaderCard;
+
     public CombatScreen(GameScreen game, Combat combat) {
         this.game = game;
         this.combat = combat;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
+
+        leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0), texture);
     }
 
     @Override

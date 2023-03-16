@@ -11,4 +11,8 @@ public class Combat {
         this.firstLeader = firstLeader;
         this.secondLeader = secondLeader;
     }
+
+    public Leader getFirstLeader() {
+        return firstLeader;
+    }
 }
