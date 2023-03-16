@@ -3,8 +3,8 @@ package com.deckard.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.deckard.Deckard;
 
+//todo not yet implemented -> go to desktop
 public class HtmlLauncher extends GwtApplication {
 
         @Override
@@ -17,6 +17,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new Deckard();
+                return null;//todo
         }
 }

@@ -4,14 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Drop extends Game {
+public class Decard extends Game {
     private SpriteBatch batch;
     private BitmapFont font;
     @Override
     public void create() {
         batch = new SpriteBatch();
-        font = new BitmapFont();//arial
-        setScreen(new MainMenuScreen(this));
+        font = new BitmapFont();
+        setScreen(new CombatView(this));
     }
 
     public void render() {
