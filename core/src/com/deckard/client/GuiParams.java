@@ -15,6 +15,8 @@ public class GuiParams {
     public static final int CARD_HEIGHT = 225;
     public static final int CARD_PADDING = 20;
     public static final int HIGHLIGHT_BORDER = 3;
+    public static final int LEADER_HAND_X = WIDTH / 3;
+    public static final int LEADER_HAND_Y = 100;
 
     public static int getWidth(double percent) {
         return (int) (WIDTH * percent);

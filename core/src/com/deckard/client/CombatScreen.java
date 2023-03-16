@@ -17,7 +17,7 @@ public class CombatScreen implements Screen {
     private final GameScreen game;
     private final OrthographicCamera camera;
     private Combat combat;
-    private CardActor leaderCard;
+
     private Stage stage;
 
     public CombatScreen(GameScreen game, Combat combat) {
@@ -29,8 +29,14 @@ public class CombatScreen implements Screen {
 
         stage = new Stage(new ScreenViewport(), game.getBatch());
         Texture  texture = new Texture(Gdx.files.internal("card.png"));
-        leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0),texture);
-        stage.addActor(leaderCard);
+        CardActor leaderCard = new CardActor(combat.getFirstLeader().getCards().get(0), texture);
+        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getCards().get(0), texture);
+        HandGroup leaderHand = new HandGroup();
+        leaderHand.setPosition(GuiParams.LEADER_HAND_X,GuiParams.LEADER_HAND_Y);
+        leaderHand.addActor(leaderCard);
+        leaderHand.addActor(leaderCard2);
+
+        stage.addActor(leaderHand);
         Gdx.input.setInputProcessor(stage);
         //leaderCard = new CardActor(, texture);
     }
