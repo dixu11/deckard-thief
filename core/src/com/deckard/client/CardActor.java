@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.deckard.server.card.Card;
 
 public class CardActor extends Actor {
@@ -21,6 +23,7 @@ public class CardActor extends Actor {
 
         setBounds(getX(), getY(), GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT);
         font.getData().scale(0.3f);
+        addListener(new DraggableCardListener());
     }
 
     @Override
@@ -34,5 +37,25 @@ public class CardActor extends Actor {
         font.setColor(GuiParams.MAIN_COLOR_DARK);
         font.draw(batch, card.getName(), getX() + centerX, getY() + getHeight() - GuiParams.CARD_PADDING);
     }
+
+    private class DraggableCardListener extends DragListener {
+        private float deltaX;
+        private float deltaY;
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            deltaX = x;
+            deltaY = y;
+            return super.touchDown(event, x, y, pointer, button);
+        }
+
+        @Override
+        public void drag(InputEvent event, float x, float y, int pointer) {
+            float newX = getX() + x - deltaX;
+            float newY = getY() + y - deltaY;
+            setPosition(newX, newY);
+        }
+    }
+
 
 }
