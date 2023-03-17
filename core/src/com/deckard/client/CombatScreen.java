@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.deckard.server.combat.Combat;
+import com.deckard.server.minion.Minion;
 
 public class CombatScreen implements Screen {
     private final GameScreen game;
@@ -27,17 +28,22 @@ public class CombatScreen implements Screen {
         camera.setToOrtho(false, 800, 480);
 
         stage = new Stage(new ScreenViewport(), game.getBatch());
-        Texture  texture = new Texture(Gdx.files.internal("card.png"));
-        CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), texture,game.getFont());
-        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getHand().get(1), texture,game.getFont());
+        Texture  cardTexture = new Texture(Gdx.files.internal("card.png"));
+        Texture minionBodyTexture = new Texture(Gdx.files.internal("minion-left.png"));
+        CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), cardTexture,game.getFont());
+        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getHand().get(1), cardTexture,game.getFont());
+        Minion firstMinion = combat.getFirstLeader().getTeam().getMinions().get(0);
+        MinionBodyActor firstMinionBody = new MinionBodyActor(firstMinion, minionBodyTexture, game.getFont());
+        firstMinionBody.setPosition(300,450);
         HandGroup leaderHand = new HandGroup();
         leaderHand.setPosition(GuiParams.LEADER_HAND_X,GuiParams.LEADER_HAND_Y);
         leaderHand.addActor(leaderCard);
         leaderHand.addActor(leaderCard2);
 
         stage.addActor(leaderHand);
+        stage.addActor(firstMinionBody);
         Gdx.input.setInputProcessor(stage);
-        //leaderCard = new CardActor(, texture);
+        //leaderCard = new CardActor(, cardTexture);
     }
 
     @Override

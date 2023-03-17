@@ -29,7 +29,7 @@ public class CardActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(),
-                GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT, getScaleX(), getScaleY(),
+                getWidth(), getHeight(), getScaleX(), getScaleY(),
                 getRotation(), 0, 0, texture.getWidth(), texture.getHeight(),
                 false, false);
         glyph.setText(font, card.getName());
