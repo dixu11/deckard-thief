@@ -13,18 +13,19 @@ public class HandGroup extends Group {
     @Override
     public void addActor(Actor actor) {
         super.addActor(actor);
-        // updateLayout();
+         updateLayout();
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        updateLayout();
+       // updateLayout();
     }
 
     public void updateLayout() {
         float totalWidth = 0f;
         float maxRotation = 30f;
+        float duration = 2f;
         SnapshotArray<Actor> cards = getChildren();
         int selectedIndex = cards.indexOf(selected, false);
 
@@ -40,15 +41,16 @@ public class HandGroup extends Group {
             } else if (i > selectedIndex && selectedIndex != -1) {
                 xOffset +=  GuiParams.CARD_SPACING*1.4;
             }
+            if (i == selectedIndex) {
+                continue;
+            }
             CardActor cardActor = (CardActor) cards.get(i);
-            float duration = 20f;
             Interpolation interpolation = Interpolation.circleOut;
             float howFarFromCenter = Math.abs(i - (cards.size - 1) / 2.0f);
 
             if (cardActor.isSelected()) {
                 xOffset += cardActor.getWidth() * (cardActor.getScaleX() - 1f) / 2f;
             }
-
             cardActor.addAction(Actions.moveTo(startingX + xOffset + i * (cardActor.getWidth() - GuiParams.CARD_SPACING),
                     GuiParams.CARD_SPACING - howFarFromCenter * 25, duration, interpolation));
 

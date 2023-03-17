@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -41,6 +43,7 @@ public class CardActor extends Actor {
                         spreadCards(CardActor.this);
                         HandGroup hand = (HandGroup) getParent();
                         hand.setSelected(CardActor.this);
+                        hand.updateLayout();
                         //replace with event
                     }
 
@@ -53,6 +56,7 @@ public class CardActor extends Actor {
                         spreadCards(null);
                         HandGroup hand = (HandGroup) getParent();
                         hand.setSelected(null);
+                        hand.updateLayout();
                     }
                 }
         );
@@ -67,12 +71,33 @@ public class CardActor extends Actor {
                 false, false);
 
         glyph.setText(font, card.getName());
-        float centerX = (getWidth()*getScaleX() - glyph.width) / 2;
         font.setColor(GuiParams.MAIN_COLOR_DARK);
         float fontScale = 1.6f * getScaleX();
-     //   float scaledCardPadding = GuiParams.CARD_PADDING * getScaleY();
         font.getData().setScale(fontScale);
-        font.draw(batch, card.getName(), getX() + centerX, getY() + getHeight()*getScaleX() - GuiParams.CARD_SPACING);
+       // float centerX = (getWidth()*getScaleX() - glyph.width) / 2;
+
+
+        // Save current batch transformation state
+        Matrix4 originalTransformMatrix = new Matrix4(batch.getTransformMatrix());
+        // Apply rotation to the batch
+
+        setRotation(0);
+
+        batch.getTransformMatrix()
+                .translate(getX(), getY() + getHeight() * getScaleX() , 0)
+                .rotate(new Vector3(0, 0, 1), getRotation())
+                .translate(-getX() , -getY() - getHeight() * getScaleX(), 0);
+       // batch.setTransformMatrix(batch.getTransformMatrix());
+
+
+        font.draw(batch, card.getName(), getX() , getY() + getHeight() * getScaleX() );
+
+
+        // Restore the original transformation state
+       // batch.setTransformMatrix(originalTransformMatrix);
+    }
+
+    private void rotateBath() {
 
     }
 
