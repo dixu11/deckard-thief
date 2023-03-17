@@ -170,10 +170,6 @@ public class Minion implements EventHandler {
         return hp != maxHp;
     }
 
-    public int getHealth() {
-        return hp;
-    }
-
     public Card getMinionCard() {
         return minionCard;
     }
@@ -184,5 +180,17 @@ public class Minion implements EventHandler {
 
     public Team getTeam() {
         return team;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }
