@@ -30,8 +30,9 @@ public class CombatScreen implements Screen {
         stage = new Stage(new ScreenViewport(), game.getBatch());
         Texture  cardTexture = new Texture(Gdx.files.internal("card.png"));
         Texture minionBodyTexture = new Texture(Gdx.files.internal("minion-left.png"));
-        CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), cardTexture,game.getFont());
-        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getHand().get(1), cardTexture,game.getFont());
+        CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), cardTexture);
+        CardActor leaderCard2 = new CardActor(combat.getFirstLeader().getHand().get(1), cardTexture);
+        CardActor leaderCard3 = new CardActor(combat.getFirstLeader().getHand().get(0), cardTexture);
         Minion firstMinion = combat.getFirstLeader().getTeam().getMinions().get(0);
         MinionBodyActor firstMinionBody = new MinionBodyActor(firstMinion, minionBodyTexture, game.getFont());
         firstMinionBody.setPosition(300,450);
@@ -39,6 +40,7 @@ public class CombatScreen implements Screen {
         leaderHand.setPosition(GuiParams.LEADER_HAND_X,GuiParams.LEADER_HAND_Y);
         leaderHand.addActor(leaderCard);
         leaderHand.addActor(leaderCard2);
+        leaderHand.addActor(leaderCard3);
 
         stage.addActor(leaderHand);
         stage.addActor(firstMinionBody);
