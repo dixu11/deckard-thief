@@ -16,9 +16,9 @@ public class GuiParams {
     public static final int CARD_HEIGHT = 225;
     public static final int MINION_WIDTH = 225;
     public static final int MINION_HEIGHT = 225;
-    public static final int CARD_PADDING = 40;
+    public static final int CARD_SPACING = 40;
     public static final int HIGHLIGHT_BORDER = 3;
-    public static final int LEADER_HAND_X = WIDTH / 3;
+    public static final int LEADER_HAND_X = (int) (WIDTH / 2 - CARD_WIDTH/2);
     public static final int LEADER_HAND_Y = 100;
 
     public static int getWidth(double percent) {
