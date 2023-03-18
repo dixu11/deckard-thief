@@ -3,6 +3,7 @@ package com.deckard.server.card.effect;
 import com.deckard.server.card.CardCategory;
 import com.deckard.server.event.*;
 import com.deckard.server.event.bus.Bus;
+import com.deckard.server.game.GameParams;
 import com.deckard.server.minion.Minion;
 
 public class ComboEffect extends AttackEffectDecorator implements EventHandler {
@@ -15,7 +16,7 @@ public class ComboEffect extends AttackEffectDecorator implements EventHandler {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " gets +1⚔️ after every attack played this turn";
+        return super.getDescription() + " gets +1"+ GameParams.ATTACK_ICON+ " after every attack played this turn";
     }
 
     @Override

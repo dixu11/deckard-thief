@@ -14,6 +14,8 @@ public class GameParams {
     public static final int STEAL_SPECIAL_COST = 3;
     public static final int UPGRADE_SPECIAL_COST = 1;
     public static final int MOVE_SPECIAL_COST = 1;
+    public static final String ATTACK_ICON = " damage ";
+    public static final String BLOCK_ICON = " block ";
 
 
 }

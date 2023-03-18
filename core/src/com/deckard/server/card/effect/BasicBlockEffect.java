@@ -1,7 +1,9 @@
 package com.deckard.server.card.effect;
 
+import com.deckard.client.GuiParams;
 import com.deckard.server.card.Card;
 import com.deckard.server.card.CardContext;
+import com.deckard.server.game.GameParams;
 
 public class BasicBlockEffect extends BasicEffect implements BlockEffect {
 
@@ -16,7 +18,7 @@ public class BasicBlockEffect extends BasicEffect implements BlockEffect {
 
     @Override
     public String getDescription() {
-        return  " +" + value + "\uD83D\uDEE1";
+        return  " +" + value + GameParams.BLOCK_ICON;
     }
 
     @Override

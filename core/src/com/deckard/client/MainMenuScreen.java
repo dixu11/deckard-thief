@@ -32,7 +32,6 @@ public class MainMenuScreen implements Screen {
             CombatFactory factory = new CombatFactory();
             game.setScreen(new CombatScreen(game, factory.createCombat()));
             dispose();
-            System.out.println("test");
         }
     }
 

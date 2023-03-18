@@ -2,6 +2,7 @@ package com.deckard.server.card.effect;
 
 import com.deckard.server.card.Card;
 import com.deckard.server.card.CardContext;
+import com.deckard.server.game.GameParams;
 
 public class BasicAttackEffect extends BasicEffect implements AttackEffect{
 
@@ -24,7 +25,7 @@ public class BasicAttackEffect extends BasicEffect implements AttackEffect{
             modifiers += " Attack ignores block.";
         }
 
-        return " " + value + "⚔️" + modifiers;
+        return " " + value + GameParams.ATTACK_ICON + modifiers;
     }
 
     @Override

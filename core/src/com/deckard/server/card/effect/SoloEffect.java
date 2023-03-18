@@ -5,6 +5,7 @@ import com.deckard.server.card.CardCategory;
 import com.deckard.server.card.CardContext;
 import com.deckard.server.event.*;
 import com.deckard.server.event.bus.Bus;
+import com.deckard.server.game.GameParams;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class  SoloEffect extends AttackEffectDecorator implements EventHandler {
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " Has +2⚔️ if it is the only attack team plays"; //todo refactor symbols
+        return super.getDescription() + " Has +2"+ GameParams.ATTACK_ICON +  " if it is the only attack team plays"; //todo refactor symbols
     }
 
     @Override

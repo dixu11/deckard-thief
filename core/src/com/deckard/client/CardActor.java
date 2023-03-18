@@ -10,49 +10,87 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Align;
 import com.deckard.server.card.Card;
+import com.deckard.server.game.GameParams;
 
-public class CardActor extends Actor {
+public class CardActor extends Group {
     private Card card;
     private Texture texture;
-    private BitmapFont font;
-    private GlyphLayout glyph;
+    private BitmapFont titleFont;
+    private GlyphLayout titleFontGlyph;
     DraggableCardListener dragListener;
     private boolean selected;
+    private Label name;
+    private Label description;
+
 
     public CardActor(Card card, Texture texture) {
         this.card = card;
         this.texture = texture;
-        font = new BitmapFont();
-        this.glyph = new GlyphLayout();
+        titleFont = new BitmapFont();
+        BitmapFont descriptionFont = new BitmapFont();
 
         setBounds(getX(), getY(), GuiParams.CARD_WIDTH, GuiParams.CARD_HEIGHT);
         dragListener = new DraggableCardListener();
         addListener(dragListener);
 
+        Label.LabelStyle titleStyle = new Label.LabelStyle();
+        titleStyle.font = titleFont;
+        titleStyle.fontColor = GuiParams.MAIN_COLOR_DARK;
+
+        Label.LabelStyle descriptionStyle = new Label.LabelStyle();
+        descriptionStyle.font = descriptionFont;
+        descriptionStyle.fontColor = GuiParams.MAIN_COLOR_DARK;
+
+        name = new Label(card.getName(),titleStyle);
+        name.setPosition(0,-GuiParams.CARD_SPACING);
+        name.setSize(getWidth(),getHeight());
+        name.setAlignment(Align.center);
+        name.setAlignment(Align.top);
+
+        description = new Label(card.getDescription(), descriptionStyle);
+        description.setPosition(0, 0);
+        description.setSize(getWidth(), getHeight());
+        description.setAlignment(Align.center);
+        description.setWrap(true);
+
+
+        addActor(name);
+        addActor(description);
+
+        float duration = 0.3f;
         //refactor
         addListener(
                 new InputListener(){
                     @Override
                     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                        animateCard(1.2f, 0.2f);
-                        spreadCards(CardActor.this);
                         HandGroup hand = (HandGroup) getParent();
                         hand.setSelected(CardActor.this);
+                        hand.updateLayout();
+
+                        if (!selected) {
+                            getActions().clear();
+                            addAction(Actions.moveTo(getX(),GuiParams.CARD_HEIGHT/2,duration, Interpolation.pow3));
+                        }
+                        animateCard(1.2f, duration);
+                        selected = true;
                         //replace with event
                     }
 
                     @Override
                     public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+
                         if (pointer == 0) { //source - drag
-                            return;
+                        //    return;
                         }
-                        animateCard(1f, 0.2f);
-                        spreadCards(null);
+                        animateCard(1f, 1f);
                         HandGroup hand = (HandGroup) getParent();
                         hand.setSelected(null);
+                        selected = false;
+                        hand.updateLayout();
                     }
                 }
         );
@@ -66,14 +104,7 @@ public class CardActor extends Actor {
                 getRotation(), 0, 0, texture.getWidth(), texture.getHeight(),
                 false, false);
 
-        glyph.setText(font, card.getName());
-        float centerX = (getWidth()*getScaleX() - glyph.width) / 2;
-        font.setColor(GuiParams.MAIN_COLOR_DARK);
-        float fontScale = 1.6f * getScaleX();
-     //   float scaledCardPadding = GuiParams.CARD_PADDING * getScaleY();
-        font.getData().setScale(fontScale);
-        font.draw(batch, card.getName(), getX() + centerX, getY() + getHeight()*getScaleX() - GuiParams.CARD_SPACING);
-
+        super.draw(batch,parentAlpha);
     }
 
     void animateCard(float targetScale, float duration) {

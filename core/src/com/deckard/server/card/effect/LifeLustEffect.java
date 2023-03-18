@@ -5,6 +5,7 @@ import com.deckard.server.event.ActionEvent;
 import com.deckard.server.event.ActionEventType;
 import com.deckard.server.event.EventHandler;
 import com.deckard.server.event.bus.Bus;
+import com.deckard.server.game.GameParams;
 
 public class LifeLustEffect extends AttackEffectDecorator implements EventHandler {
     public LifeLustEffect(AttackEffect decorated) {
@@ -20,7 +21,7 @@ public class LifeLustEffect extends AttackEffectDecorator implements EventHandle
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " unblocked ⚔️ regenerates your ♥"; //todo put icons to separate class
+        return super.getDescription() + " unblocked "+ GameParams.ATTACK_ICON+ " regenerates your ♥"; //todo put icons to separate class
     }
 
     @Override
