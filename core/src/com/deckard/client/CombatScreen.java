@@ -25,9 +25,9 @@ public class CombatScreen implements Screen {
         this.combat = combat;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, GuiParams.WIDTH, GuiParams.HEIGHT);
 
-        stage = new Stage(new ScreenViewport(), game.getBatch());
+        stage = new Stage(new ScreenViewport(camera), game.getBatch());
         Texture  cardTexture = new Texture(Gdx.files.internal("card.png"));
         Texture minionBodyTexture = new Texture(Gdx.files.internal("minion-left.png"));
         CardActor leaderCard = new CardActor(combat.getFirstLeader().getHand().get(0), cardTexture);
@@ -58,13 +58,14 @@ public class CombatScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.DARK_GRAY);
+        camera.update();
+        SpriteBatch batch = game.getBatch();
+        batch.setProjectionMatrix(camera.combined);
         //stage
         stage.act(delta);
-        SpriteBatch batch = game.getBatch();
+
         stage.draw();
         //camera
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
         //example render
 
 
