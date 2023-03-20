@@ -116,4 +116,12 @@ public class Combat implements EventHandler {
     public Leader getFirstLeader() {
         return firstLeader;
     }
+
+    public Team getFirstTeam() {
+        return firstTeam;
+    }
+
+    public Team getSecondTeam() {
+        return secondTeam;
+    }
 }

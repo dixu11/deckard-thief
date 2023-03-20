@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.deckard.server.combat.Combat;
 import com.deckard.server.combat.CombatFactory;
 
 public class GameScreen extends Game {
@@ -15,7 +16,9 @@ public class GameScreen extends Game {
         batch = new SpriteBatch();
         font = new BitmapFont();
         CombatFactory factory = new CombatFactory();
-        setScreen(new CombatScreen(this, factory.createCombat()));
+        Combat combat = factory.createCombat();
+        combat.start();
+        setScreen(new CombatScreen(this, combat));
     }
 
     public void render() {

@@ -9,12 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.deckard.server.minion.Minion;
 
 public class MinionBodyActor extends Actor {
+    private static final float HEALTH_BAR_WIDTH = GuiParams.MINION_WIDTH * 0.8f;
+    private static final float HEALTH_BAR_HEIGHT = 5f;
     private Minion minion;
     private Texture texture;
     private BitmapFont font;
     private GlyphLayout glyph;
-    private static final float HEALTH_BAR_WIDTH = GuiParams.MINION_WIDTH * 0.8f;
-    private static final float HEALTH_BAR_HEIGHT = 5f;
+    private boolean flipX = false;
 
     public MinionBodyActor(Minion minion, Texture texture, BitmapFont font) {
         this.minion = minion;
@@ -24,7 +25,6 @@ public class MinionBodyActor extends Actor {
 
         minion.setHp(6);
         setBounds(getX(), getY(), GuiParams.MINION_WIDTH, GuiParams.MINION_HEIGHT);
-        //font.getData().scale(0.3f);
     }
 
     @Override
@@ -32,8 +32,13 @@ public class MinionBodyActor extends Actor {
         batch.draw(texture, getX(), getY(), getOriginX(), getOriginY(),
                 getWidth(), getHeight(), getScaleX(), getScaleY(),
                 getRotation(), 0, 0, texture.getWidth(), texture.getHeight(),
-                false, false);
+                flipX, false);
 
+        renderHealthBard(batch);
+
+    }
+
+    private void renderHealthBard(Batch batch) {
         float healthBarX = getX() + (getWidth() - HEALTH_BAR_WIDTH) / 2;
         float healthBarY = getY() - 10f - HEALTH_BAR_HEIGHT;
         batch.setColor(Color.BLACK);
@@ -53,7 +58,9 @@ public class MinionBodyActor extends Actor {
         float textX = getX() + (getWidth() - glyph.width) / 2;
         float textY = healthBarY - 5f;
         font.draw(batch, hpText, textX, textY);
-
     }
 
+    public void setFlipX(boolean flipX) {
+        this.flipX = flipX;
+    }
 }
