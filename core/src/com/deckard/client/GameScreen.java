@@ -9,20 +9,17 @@ import com.deckard.server.combat.CombatFactory;
 
 public class GameScreen extends Game {
     private SpriteBatch batch;
-
     private BitmapFont font;
-    private GlyphLayout glyphLayout;
     @Override
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        glyphLayout = new GlyphLayout();
         CombatFactory factory = new CombatFactory();
         setScreen(new CombatScreen(this, factory.createCombat()));
     }
 
     public void render() {
-        super.render(); //!
+        super.render();
     }
 
     public void dispose() {

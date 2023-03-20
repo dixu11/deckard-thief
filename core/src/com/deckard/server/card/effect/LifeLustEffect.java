@@ -21,7 +21,7 @@ public class LifeLustEffect extends AttackEffectDecorator implements EventHandle
 
     @Override
     public String getDescription() {
-        return super.getDescription() + " unblocked "+ GameParams.ATTACK_ICON+ " regenerates your ♥"; //todo put icons to separate class
+        return super.getDescription() + " unblocked "+ GameParams.ATTACK_ICON+ " regenerates your "+GameParams.HEALTH_ICON;
     }
 
     @Override

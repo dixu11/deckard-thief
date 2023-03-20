@@ -2,6 +2,7 @@ package com.deckard.server.card.effect;
 
 import com.deckard.server.card.Card;
 import com.deckard.server.card.CardContext;
+import com.deckard.server.game.GameParams;
 import com.deckard.server.game.MyRandom;
 import com.deckard.server.minion.Minion;
 
@@ -24,7 +25,7 @@ public class HealEffect extends BasicEffect {
 
     @Override
     public String getDescription() {
-        return "+1♥ to random wounded friendly minion";
+        return "+1" + GameParams.HEALTH_ICON + " to random wounded friendly minion";
     }
 
     @Override

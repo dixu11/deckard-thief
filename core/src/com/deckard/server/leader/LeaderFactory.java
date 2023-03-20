@@ -10,8 +10,13 @@ public class LeaderFactory {
     public Leader create(LeaderType type) {
         Leader leader = new Leader(teamFactory.create(type));
         if (type == LeaderType.PLAYER) {
-            leader.addCard(new CardFactory().createCard(CardType.UPGRADED_ATTACK));
-            leader.addCard(new CardFactory().createCard(CardType.BLOCK_BOOSTER));
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
+            leader.addCard(new CardFactory().createRandomCard());
         }
         return leader;
     }

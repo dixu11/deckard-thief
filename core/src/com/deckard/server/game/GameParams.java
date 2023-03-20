@@ -16,6 +16,7 @@ public class GameParams {
     public static final int MOVE_SPECIAL_COST = 1;
     public static final String ATTACK_ICON = " damage ";
     public static final String BLOCK_ICON = " block ";
+    public static final String HEALTH_ICON = " hp ";
 
 
 }
