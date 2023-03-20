@@ -36,7 +36,7 @@ public class Combat implements EventHandler {
     private final Team firstTeam;
     private final Team secondTeam;
     private final CombatState combatState = CombatState.getInstance();
-    private static boolean delayCardPlay = true;
+    private static boolean delayCardPlay = false;
 
     public Combat(Leader firstLeader, Leader secondLeader) {
         this.firstTeam = firstLeader.getTeam();

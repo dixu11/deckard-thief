@@ -1,6 +1,7 @@
 package com.deckard.client;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -17,8 +18,8 @@ public class GameScreen extends Game {
         font = new BitmapFont();
         CombatFactory factory = new CombatFactory();
         Combat combat = factory.createCombat();
-        combat.start();
         setScreen(new CombatScreen(this, combat));
+        combat.start();
     }
 
     public void render() {

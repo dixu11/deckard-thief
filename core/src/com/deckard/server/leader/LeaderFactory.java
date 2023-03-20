@@ -15,8 +15,6 @@ public class LeaderFactory {
             leader.addCard(new CardFactory().createRandomCard());
             leader.addCard(new CardFactory().createRandomCard());
             leader.addCard(new CardFactory().createRandomCard());
-            leader.addCard(new CardFactory().createRandomCard());
-            leader.addCard(new CardFactory().createRandomCard());
         }
         return leader;
     }

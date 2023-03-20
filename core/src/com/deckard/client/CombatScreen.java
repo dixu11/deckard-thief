@@ -13,9 +13,13 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.deckard.server.card.Card;
 import com.deckard.server.combat.Combat;
+import com.deckard.server.event.ActionEvent;
+import com.deckard.server.event.ActionEventType;
+import com.deckard.server.event.EventHandler;
+import com.deckard.server.event.bus.Bus;
 import com.deckard.server.minion.Minion;
 
-public class CombatScreen implements Screen {
+public class CombatScreen implements Screen, EventHandler {
     private final GameScreen game;
     private final OrthographicCamera camera;
     private Combat combat;
@@ -39,13 +43,13 @@ public class CombatScreen implements Screen {
         }
         leaderHand.setPosition(GuiParams.LEADER_HAND_X, GuiParams.LEADER_HAND_Y);
         stage.addActor(leaderHand);
+        leaderHand.updateLayout();
         //minion
         TeamGroupFactory teamGroupFactory = new TeamGroupFactory(game);
         stage.addActor(teamGroupFactory.createTeam(TeamGroupFactory.Side.LEFT,combat.getFirstTeam()));
         stage.addActor(teamGroupFactory.createTeam(TeamGroupFactory.Side.RIGHT,combat.getSecondTeam()));
         Gdx.input.setInputProcessor(stage);
     }
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Color.DARK_GRAY);

@@ -9,12 +9,10 @@ public class TeamGroupFactory {
 
     private GameScreen game;
     private Texture minionBodyTexture;
-    private Texture cardTexture;
 
     public TeamGroupFactory(GameScreen game) {
         this.game = game;
         minionBodyTexture = new Texture(Gdx.files.internal("minion-left.png"));
-        cardTexture = new Texture(Gdx.files.internal("card.png"));
     }
 
     public enum Side {
@@ -40,9 +38,6 @@ public class TeamGroupFactory {
             firstMinionBody.setFlipX(true);
         }
         HandGroup minionHand = new HandGroup();
-        minion.getHand().stream()
-                .map(card -> new CardActor(card, cardTexture))
-                .forEach(minionHand::addActor);
-        return new MinionGroup(firstMinionBody, minionHand);
+        return new MinionGroup(firstMinionBody, minionHand, minion);
     }
 }
