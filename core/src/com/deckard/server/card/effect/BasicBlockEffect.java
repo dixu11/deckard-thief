@@ -1,6 +1,5 @@
 package com.deckard.server.card.effect;
 
-import com.deckard.client.GuiParams;
 import com.deckard.server.card.Card;
 import com.deckard.server.card.CardContext;
 import com.deckard.server.game.GameParams;

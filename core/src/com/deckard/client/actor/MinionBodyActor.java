@@ -1,4 +1,4 @@
-package com.deckard.client;
+package com.deckard.client.actor;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.deckard.client.core.GuiParams;
 import com.deckard.server.minion.Minion;
 
 public class MinionBodyActor extends Actor {

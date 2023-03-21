@@ -1,4 +1,4 @@
-package com.deckard.client;
+package com.deckard.client.animation;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 
@@ -11,7 +11,6 @@ public class CountDownAction extends Action {
 
     @Override
     public boolean act(float delta) {
-        System.out.println("Countdown done");
         count--;
         return true;
     }

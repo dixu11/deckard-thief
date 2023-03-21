@@ -1,8 +1,6 @@
-package com.deckard.client;
+package com.deckard.client.actor;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-
-import java.util.List;
 
 public class TeamGroup extends Group {
 

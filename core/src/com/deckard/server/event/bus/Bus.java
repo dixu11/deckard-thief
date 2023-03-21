@@ -1,6 +1,6 @@
 package com.deckard.server.event.bus;
 
-import com.deckard.client.GuiEvent;
+import com.deckard.client.core.GuiEvent;
 import com.deckard.server.event.*;
 
 /**

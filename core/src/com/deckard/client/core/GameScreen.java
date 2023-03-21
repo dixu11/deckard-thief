@@ -1,10 +1,7 @@
-package com.deckard.client;
+package com.deckard.client.core;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.deckard.server.combat.Combat;
 import com.deckard.server.combat.CombatFactory;

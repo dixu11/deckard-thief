@@ -1,4 +1,4 @@
-package com.deckard.client;
+package com.deckard.client.actor;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.Align;
+import com.deckard.client.core.GuiParams;
 import com.deckard.server.card.Card;
 
 public class CardActor extends Group {

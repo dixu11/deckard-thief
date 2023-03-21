@@ -1,9 +1,11 @@
-package com.deckard.client;
+package com.deckard.client.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.deckard.client.core.CombatScreen;
+import com.deckard.client.core.GameScreen;
 import com.deckard.server.combat.CombatFactory;
 
 public class MainMenuScreen implements Screen {

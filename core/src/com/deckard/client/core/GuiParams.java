@@ -1,4 +1,4 @@
-package com.deckard.client;
+package com.deckard.client.core;
 
 
 import com.badlogic.gdx.graphics.Color;

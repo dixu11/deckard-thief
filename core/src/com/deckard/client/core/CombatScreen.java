@@ -1,23 +1,20 @@
-package com.deckard.client;
+package com.deckard.client.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.deckard.client.actor.CardActor;
+import com.deckard.client.actor.HandGroup;
+import com.deckard.client.actor.TeamGroupFactory;
 import com.deckard.server.card.Card;
 import com.deckard.server.combat.Combat;
-import com.deckard.server.event.ActionEvent;
-import com.deckard.server.event.ActionEventType;
 import com.deckard.server.event.EventHandler;
-import com.deckard.server.event.bus.Bus;
-import com.deckard.server.minion.Minion;
 
 public class CombatScreen implements Screen, EventHandler {
     private final GameScreen game;

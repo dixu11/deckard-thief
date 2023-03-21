@@ -1,7 +1,8 @@
-package com.deckard.client;
+package com.deckard.client.actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.deckard.client.core.GameScreen;
 import com.deckard.server.minion.Minion;
 import com.deckard.server.team.Team;
 

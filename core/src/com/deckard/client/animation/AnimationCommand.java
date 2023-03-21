@@ -1,8 +1,8 @@
-package com.deckard.client;
+package com.deckard.client.animation;
 
 public class AnimationCommand {
 
-    private Runnable runnable;
+    private final Runnable runnable;
 
     public AnimationCommand(Runnable runnable) {
         this.runnable = runnable;
