@@ -1,0 +1,19 @@
+{
+  "com.badlogic.gdx.graphics.g2d.BitmapFont": {
+    "default-font": {
+      "file": "default.fnt"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+    "default": {
+      "name": "white",
+      "color": "#808080"
+    }
+  },
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "default": {
+      "up": "default",
+      "font": "default-font"
+    }
+  }
+}
