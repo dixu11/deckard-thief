@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+
 public class HandGroup extends Group {
     private static final float MAX_ROTATION = 30f;
     private static final float LAYOUT_ANIMATION_DURATION = 0.25f; //was 1
@@ -154,7 +156,7 @@ public class HandGroup extends Group {
 
                 //animate rotation
                 float rotation = calculateRotation(cards.size(), i, howFarFromCenter);
-                cardActor.addAction(Actions.rotateTo(rotation, duration, interpolation));
+                cardActor.addAction( rotateTo(rotation, duration, interpolation));
             }
         }
     }

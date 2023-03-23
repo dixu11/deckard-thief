@@ -109,9 +109,11 @@ public class MinionGroup extends Group implements EventHandler {
         cardActor.setPosition(0, 0);
 
         float duration = delay + 0.15f;
+//        float duration = 4;
 //        float duration = delay + 0.25f;
-        cardActor.addAction(sequence(rotateTo(-140, 0), fadeOut(0), new ShowAnimation(),
-                hand.getUpdateAction(duration), fadeIn(duration), countDownDraw));
+        cardActor.setPosition(0,-GuiParams.CARD_HEIGHT);
+        cardActor.addAction(sequence(rotateTo(-140, 0),moveTo(cardActor.getX()+GuiParams.CARD_WIDTH,cardActor.getY()),scaleTo(0.75f,0.75f), fadeOut(0), new ShowAnimation(),
+                hand.getUpdateAction(duration),parallel( fadeIn(duration),scaleTo(1f,1f,duration)), countDownDraw));
         drawSound.play();
     }
 
@@ -120,7 +122,9 @@ public class MinionGroup extends Group implements EventHandler {
         CardActor cardActor = hand.getActor(event.getCard());
         float duration = 0.5f;
         cardActor.setLayoutIgnore(true);
-        cardActor.addAction(sequence(parallel(fadeOut(duration),rotateTo(140,duration),hand.getUpdateAction(0.30f)), countDownDiscard,run(()-> hand.remove(cardActor))));
+        cardActor.addAction(sequence(parallel(fadeOut(duration),rotateTo(140,duration),scaleTo(0.25f,0.25f,duration),
+                moveTo(cardActor.getX(),cardActor.getY()-GuiParams.CARD_HEIGHT,duration),hand.getUpdateAction(0.30f)),
+                countDownDiscard,run(()-> hand.remove(cardActor))));
         discardSound.play();
     }
 
