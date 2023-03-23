@@ -27,6 +27,7 @@ public class BasicBlockEffect extends BasicEffect implements BlockEffect {
 
     @Override
     public int getBlock() {
-        return value;
+//        return value;
+        return 0;//todo disable block on!
     }
 }

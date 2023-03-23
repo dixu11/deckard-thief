@@ -5,6 +5,7 @@ package com.deckard.server.event;
  */
 public enum ActionEventType implements EventType {
     MINION_CARD_DISCARDED,
+    MINION_CARD_EXECUTED,
     MINION_CARD_PLAYED,
     MINION_CARD_DRAW,
     MINION_DAMAGED,

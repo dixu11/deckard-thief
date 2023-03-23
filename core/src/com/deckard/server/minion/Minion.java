@@ -13,6 +13,7 @@ import com.deckard.server.leader.Leader;
 import com.deckard.server.team.Team;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * {@link Minion}s form a {@link Team} to take a part in a {@link Combat} for their {@link Leader}, controlled by player
@@ -25,7 +26,8 @@ public class Minion implements EventHandler {
     //deck
     private final MinionDeck deck;
     //stats
-    private final int maxHp = CardType.BASIC_MINION.getValue();
+//    private final int maxHp = CardType.BASIC_MINION.getValue();
+    private final int maxHp = new Random().nextInt(8,15);
     private int hp = maxHp;
     //other
     private Team team;

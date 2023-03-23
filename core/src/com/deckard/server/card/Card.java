@@ -97,11 +97,18 @@ public class Card {
     }
 
     public void play(CardContext context) {
+        Bus.post(ActionEvent.builder()
+                .type(ActionEventType.MINION_CARD_PLAYED)
+                .card(context.getCard())
+                .minion(context.getMinion())
+                .ownTeam(context.getOwnTeam())
+                .enemyTeam(context.getEnemyTeam())
+                .build());
         for (CardEffect effect : effects) {
             effect.execute(context);
         }
         Bus.post(ActionEvent.builder()
-                .type(ActionEventType.MINION_CARD_PLAYED)
+                .type(ActionEventType.MINION_CARD_EXECUTED)
                 .card(context.getCard())
                 .minion(context.getMinion())
                 .ownTeam(context.getOwnTeam())

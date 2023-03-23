@@ -1,5 +1,6 @@
 package com.deckard.server.event.bus;
 
+import com.badlogic.gdx.Gdx;
 import com.deckard.client.core.GuiEvent;
 import com.deckard.server.event.*;
 
@@ -26,6 +27,7 @@ public class Bus {
     }
 
     public static void post(ActionEvent event) {
+        Gdx.app.log("EVENT",  event.getType().name());
         instance.post(event);
     }
 

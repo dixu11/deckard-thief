@@ -20,6 +20,8 @@ public class CardActor extends Group {
     private Card card;
     private Texture texture;
     private boolean selected;
+    private static final float ANIMATION_DURATION = 0.3f;
+    private boolean layoutIgnore;
 
     public CardActor(Card card, Texture texture) {
         this.card = card;
@@ -78,8 +80,20 @@ public class CardActor extends Group {
         return selected;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
+    public void select() {
+        animateCard(1.2f, ANIMATION_DURATION);
+        selected = true;
+    }
+
+    public void unselect() {
+        selected = false;
+    }
+
     private class HoverCardListener extends InputListener {
-        private static final float ANIMATION_DURATION = 0.3f;
 
         @Override
         public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -91,8 +105,7 @@ public class CardActor extends Group {
                 getActions().clear();
                 addAction(Actions.moveTo(getX(), GuiParams.CARD_HEIGHT / 2, ANIMATION_DURATION, Interpolation.pow3));
             }
-            animateCard(1.2f, ANIMATION_DURATION);
-            selected = true;
+          select();
             //replace with event
         }
 
@@ -127,5 +140,13 @@ public class CardActor extends Group {
             float newY = getY() + y - deltaY;
             setPosition(newX, newY);
         }
+    }
+
+    public void setLayoutIgnore(boolean layoutIgnore) {
+        this.layoutIgnore = layoutIgnore;
+    }
+
+    public boolean isLayoutIgnore() {
+        return layoutIgnore;
     }
 }

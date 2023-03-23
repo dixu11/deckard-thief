@@ -10,6 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.utils.SnapshotArray;
 import com.deckard.client.core.GuiParams;
+import com.deckard.server.card.Card;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class HandGroup extends Group {
     private static final float MAX_ROTATION = 30f;
@@ -19,13 +25,16 @@ public class HandGroup extends Group {
 
     @Override
     public void addActor(Actor actor) {
+        CardActor cardActor = (CardActor) actor;
+        cardActor.setLayoutIgnore(false);
         super.addActor(actor);
-       // updateLayout();
+        // updateLayout();
     }
 
     public void updateLayout() {
         addAction(new UpdateLayoutAction());
     }
+
     public void updateLayout(float duration) {
         addAction(new UpdateLayoutAction(duration));
     }
@@ -34,7 +43,7 @@ public class HandGroup extends Group {
         return new UpdateLayoutAction(duration);
     }
 
-    private static float countTotalWidth(SnapshotArray<Actor> cards) {
+    private static float countTotalWidth(Iterable<? extends Actor> cards) {
         float totalWidth = 0f;
         for (Actor card : cards) {
             totalWidth += card.getWidth() - GuiParams.CARD_SPACING;
@@ -56,12 +65,12 @@ public class HandGroup extends Group {
         return xOffset;
     }
 
-    private static float calculateRotation(SnapshotArray<Actor> cards, int i, float howFarFromCenter) {
+    private static float calculateRotation(int size, int i, float howFarFromCenter) {
         if (howFarFromCenter == 0) {
             return 0;
         }
-        float rotation = (howFarFromCenter / (cards.size - 1) / 2.0f) * MAX_ROTATION;
-        if (i > (cards.size - 1) / 2.0f) {
+        float rotation = (howFarFromCenter / (size - 1) / 2.0f) * MAX_ROTATION;
+        if (i > (size - 1) / 2.0f) {
             rotation = -rotation;
         }
         return rotation;
@@ -71,49 +80,83 @@ public class HandGroup extends Group {
         this.selected = selected;
     }
 
-   public class UpdateLayoutAction extends Action {
+    public void selectCard(Card card) {
+        CardActor cardActor = getActor(card);
+        cardActor.select();
+        selected = cardActor;
+    }
+
+    public void remove(CardActor cardActor) {
+        if (selected!= null && selected.equals(cardActor)) {
+            selected.unselect();
+            selected = null;
+        }
+        removeActor(cardActor);
+    }
+
+    public CardActor getActor(Card card) {
+        for (Actor child : getChildren()) {
+            CardActor cardActor = (CardActor) child;
+            if (cardActor.getCard().equals(card)) {
+                return cardActor;
+            }
+        }
+        throw new NoSuchElementException();
+    }
+
+    public class UpdateLayoutAction extends Action {
 
         private float duration = 1f;
 
-       public UpdateLayoutAction(float duration) {
-           this.duration = duration;
-       }
+        public UpdateLayoutAction(float duration) {
+            this.duration = duration;
+        }
 
-       public UpdateLayoutAction() {
-       }
+        public UpdateLayoutAction() {
+        }
 
-       @Override
+        @Override
         public boolean act(float delta) {
             updateLayout(duration);
             return true;
         }
 
-       public void updateLayout(float duration) {
-           SnapshotArray<Actor> cards = getChildren();
-           int selectedIndex = cards.indexOf(selected, false);
+        private List<CardActor> getNotIgnored() {
+            SnapshotArray<Actor> cards = getChildren();
+           return Arrays.stream(cards.toArray())
+                   .map(card -> ((CardActor) card))
+                    .filter(cardActor -> !cardActor.isLayoutIgnore())
+                    .toList();
+        }
 
-           float totalWidth = countTotalWidth(cards);
-           float startingX = -totalWidth / 2;
+        public void updateLayout(float duration) {
+            List<CardActor> cards = getNotIgnored();
 
-           for (int i = 0; i < cards.size; i++) {
-               if (selectedIndex == i) {
-                   continue;
-               }
-               CardActor cardActor = (CardActor) cards.get(i);
-               float xOffset = calculateOffsetX(selectedIndex, i, cardActor);
 
-               Interpolation interpolation = Interpolation.circleOut;
-               float howFarFromCenter = Math.abs(i - (cards.size - 1) / 2.0f);
+            int selectedIndex = cards.indexOf(selected);
 
-               //animate moveTo
-               cardActor.addAction(Actions.moveTo(startingX + xOffset + i * (cardActor.getWidth() - GuiParams.CARD_SPACING),
-                       GuiParams.CARD_SPACING - howFarFromCenter * 25, duration, interpolation));
+            float totalWidth = countTotalWidth(cards);
+            float startingX = -totalWidth / 2;
 
-               //animate rotation
-               float rotation = calculateRotation(cards, i, howFarFromCenter);
-               cardActor.addAction(Actions.rotateTo(rotation, duration, interpolation));
-           }
-       }
+            for (int i = 0; i < cards.size(); i++) {
+                if (selectedIndex == i) {
+                    continue;
+                }
+                CardActor cardActor = (CardActor) cards.get(i);
+                float xOffset = calculateOffsetX(selectedIndex, i, cardActor);
+
+                Interpolation interpolation = Interpolation.circleOut;
+                float howFarFromCenter = Math.abs(i - (cards.size() - 1) / 2.0f);
+
+                //animate moveTo
+                cardActor.addAction(Actions.moveTo(startingX + xOffset + i * (cardActor.getWidth() - GuiParams.CARD_SPACING),
+                        GuiParams.CARD_SPACING - howFarFromCenter * 25, duration, interpolation));
+
+                //animate rotation
+                float rotation = calculateRotation(cards.size(), i, howFarFromCenter);
+                cardActor.addAction(Actions.rotateTo(rotation, duration, interpolation));
+            }
+        }
     }
 
 }

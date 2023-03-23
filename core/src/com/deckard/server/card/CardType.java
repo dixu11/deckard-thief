@@ -10,7 +10,7 @@ import static com.deckard.server.card.CardRarity.COMMON;
 
 public enum CardType {
     BASIC_ATTACK(ATTACK, BASIC, "Basic Attack ", 1),
-    UPGRADED_ATTACK(ATTACK, COMMON, "Better Attack", 2),
+    UPGRADED_ATTACK(ATTACK, COMMON, "Better Attack", 3),
     BASIC_BLOCK(BLOCK, BASIC, "Basic Block", 1),
     UPGRADED_BLOCK(BLOCK, COMMON, "Better Block", 2),
     BASIC_MINION(MINION, BASIC, "Minion", 10),

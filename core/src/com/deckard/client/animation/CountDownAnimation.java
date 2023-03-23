@@ -2,10 +2,10 @@ package com.deckard.client.animation;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-public class CountDownAction extends Action {
+public class CountDownAnimation extends Action {
     private int count;
 
-    public CountDownAction(int count) {
+    public CountDownAnimation(int count) {
         this.count = count;
     }
 
