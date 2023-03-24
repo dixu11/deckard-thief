@@ -97,7 +97,8 @@ public class CardActor extends Group {
 
         @Override
         public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-            HandGroup hand = (HandGroup) getParent();
+
+         /*   HandGroup hand = (HandGroup) getParent();
             hand.setSelected(CardActor.this);
             hand.updateLayout();
 
@@ -105,7 +106,7 @@ public class CardActor extends Group {
                 getActions().clear();
                 addAction(Actions.moveTo(getX(), GuiParams.CARD_HEIGHT / 2, ANIMATION_DURATION, Interpolation.pow3));
             }
-          select();
+          select();*/
             //replace with event
         }
 
